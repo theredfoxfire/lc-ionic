@@ -1,9 +1,11 @@
 package com.example.app;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.content.Context;
 
 class MyWebViewClient extends WebViewClient {
 
@@ -18,4 +20,5 @@ class MyWebViewClient extends WebViewClient {
         view.getContext().startActivity(intent);
         return true;
     }
+
 }

@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Begin AdMob implementation
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -31,17 +33,24 @@ public class MainActivity extends Activity {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         AdView.loadAd(adRequest);
+
+        // Begin webview
         mWebView = findViewById(R.id.activity_main_webview);
-        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebViewClient(new WebViewClient() {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                mWebView.loadUrl("file:///android_asset/no-internet.html");
+            }
+        });
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
-        // REMOTE RESOURCE
-         mWebView.loadUrl("https://lucidcouple.com/");
-         mWebView.setWebViewClient(new MyWebViewClient());
-
-        // LOCAL RESOURCE
-        // mWebView.loadUrl("file:///android_asset/index.html");
+        if (!DetectConnection.checkInternetConnection(this)) {
+            //LOCAL RESOURCE
+            mWebView.loadUrl("file:///android_asset/no-internet.html");
+        } else {
+            // REMOTE RESOURCE
+            mWebView.loadUrl("https://lucidcouple.com/");
+            mWebView.setWebViewClient(new MyWebViewClient());
+        }
     }
 
     @Override
