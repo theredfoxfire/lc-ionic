@@ -49,7 +49,6 @@ public class MainActivity extends Activity {
         } else {
             // REMOTE RESOURCE
             mWebView.loadUrl("https://lucidcouple.com/");
-            mWebView.setWebViewClient(new MyWebViewClient());
         }
     }
 
