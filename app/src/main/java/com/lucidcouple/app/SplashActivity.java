@@ -1,4 +1,4 @@
-package com.example.app;
+package com.lucidcouple.app;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

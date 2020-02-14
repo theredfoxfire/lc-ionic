@@ -1,4 +1,4 @@
-package com.example.app;
+package com.lucidcouple.app;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
