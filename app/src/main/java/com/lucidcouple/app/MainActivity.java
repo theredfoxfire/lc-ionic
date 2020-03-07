@@ -30,6 +30,8 @@ import android.view.View;
 
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -139,11 +141,7 @@ public class MainActivity extends Activity{
         }else {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        webView.setWebViewClient(new Callback(){
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                webView.loadUrl("file:///android_asset/no-internet.html");
-            }
-        });
+        webView.setWebViewClient(new Callback());
         if (!DetectConnection.checkInternetConnection(this)) {
             //LOCAL RESOURCE
             webView.loadUrl("file:///android_asset/no-internet.html");
@@ -276,8 +274,28 @@ public class MainActivity extends Activity{
 
     /*-- callback reporting if error occurs --*/
     public class Callback extends WebViewClient{
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){
-            Toast.makeText(getApplicationContext(), "Failed loading app!", Toast.LENGTH_SHORT).show();
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            Toast.makeText(getApplicationContext(), "Gagal membuka aplikasi!", Toast.LENGTH_SHORT).show();
+            view.loadDataWithBaseURL( "file:///android_asset/", "<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                    "</head>\n" +
+                    "<body style=\"\n" +
+                    "    font-family: Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;\n" +
+                    "\n" +
+                    "    letter-spacing: 1px;\">\n" +
+                    "    <div style=\"text-align: center; padding-top: 50px;padding-left: 25px;padding-right:25px;\">\n" +
+                    "        <span style=\"color: #009bd7;font-weight: 700;text-transform: uppercase;\">Lucidcouple</span> <br><br>\n" +
+                    "        Sepertinya jaringan internet mu kurang bagus, <br>silakan periksa koneksi internet mu.. <br><br>\n" +
+                    "        <a href=\"https://lucidcouple.com/\" style=\"text-decoration: none;text-transform: uppercase;\">Coba Lagi</a>\n" +
+                    "    </div>\n" +
+                    "\n" +
+                    "</body>\n" +
+                    "</html>", "text/html","utf-8", null );
+//            view.loadUrl("file:///android_asset/no-internet.html");
         }
     }
 
