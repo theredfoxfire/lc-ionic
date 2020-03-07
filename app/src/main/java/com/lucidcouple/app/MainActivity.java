@@ -42,7 +42,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends Activity{
 
     /*-- CUSTOMIZE --*/
     /*-- you can customize these options for your convenience --*/
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    @SuppressLint({"SetJavaScriptEnabled", "WrongViewCast"})
+    @SuppressLint({"SetJavaScriptEnabled"})
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -139,8 +139,18 @@ public class MainActivity extends AppCompatActivity{
         }else {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        webView.setWebViewClient(new Callback());
-        webView.loadUrl(webview_url);
+        webView.setWebViewClient(new Callback(){
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                webView.loadUrl("file:///android_asset/no-internet.html");
+            }
+        });
+        if (!DetectConnection.checkInternetConnection(this)) {
+            //LOCAL RESOURCE
+            webView.loadUrl("file:///android_asset/no-internet.html");
+        } else {
+            // REMOTE RESOURCE
+            webView.loadUrl("https://lucidcouple.com/");
+        }
         webView.setWebChromeClient(new WebChromeClient() {
 
             /*--
