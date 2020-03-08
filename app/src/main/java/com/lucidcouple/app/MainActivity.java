@@ -43,6 +43,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class MainActivity extends Activity{
 
@@ -126,6 +131,19 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Begin AdMob implementation
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView AdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        AdView.loadAd(adRequest);
+        //End of Admob
 
         webView = (WebView) findViewById(R.id.activity_main_webview);
         assert webView != null;
@@ -295,7 +313,6 @@ public class MainActivity extends Activity{
                     "\n" +
                     "</body>\n" +
                     "</html>", "text/html","utf-8", null );
-//            view.loadUrl("file:///android_asset/no-internet.html");
         }
     }
 
