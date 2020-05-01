@@ -1,4 +1,4 @@
-package com.lucidcouple.app;
+package com.pradiste.app;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

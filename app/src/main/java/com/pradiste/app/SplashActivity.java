@@ -1,4 +1,4 @@
-package com.lucidcouple.app;
+package com.pradiste.app;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

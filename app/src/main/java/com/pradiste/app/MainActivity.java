@@ -1,4 +1,4 @@
-package com.lucidcouple.app;
+package com.pradiste.app;
 
 /*
  * Os-FileUp is an Open Source Android Project hosted on GitHub (https://github.com/mgks/Os-FileUp).
@@ -53,7 +53,7 @@ public class MainActivity extends Activity{
 
     /*-- CUSTOMIZE --*/
     /*-- you can customize these options for your convenience --*/
-    private static String webview_url   = "https://lucidcouple.com/";    // web address or local file location you want to open in webview
+    private static String webview_url   = "https://pradiste.com/";    // web address or local file location you want to open in webview
     private static String file_type     = "image/*";    // file types to be allowed for upload
     private boolean multiple_files      = false;         // allowing multiple file upload
 
@@ -165,7 +165,7 @@ public class MainActivity extends Activity{
             webView.loadUrl("file:///android_asset/no-internet.html");
         } else {
             // REMOTE RESOURCE
-            webView.loadUrl("https://lucidcouple.com/");
+            webView.loadUrl("https://pradiste.com/");
         }
         webView.setWebChromeClient(new WebChromeClient() {
 
@@ -306,9 +306,9 @@ public class MainActivity extends Activity{
                     "\n" +
                     "    letter-spacing: 1px;\">\n" +
                     "    <div style=\"text-align: center; padding-top: 50px;padding-left: 25px;padding-right:25px;\">\n" +
-                    "        <span style=\"color: #009bd7;font-weight: 700;text-transform: uppercase;\">Lucidcouple</span> <br><br>\n" +
+                    "        <span style=\"color: #009bd7;font-weight: 700;text-transform: uppercase;\">Pradiste</span> <br><br>\n" +
                     "        Sepertinya jaringan internet mu kurang bagus, <br>silakan periksa koneksi internet mu.. <br><br>\n" +
-                    "        <a href=\"https://lucidcouple.com/\" style=\"text-decoration: none;text-transform: uppercase;\">Coba Lagi</a>\n" +
+                    "        <a href=\"https://pradiste.com/\" style=\"text-decoration: none;text-transform: uppercase;\">Coba Lagi</a>\n" +
                     "    </div>\n" +
                     "\n" +
                     "</body>\n" +

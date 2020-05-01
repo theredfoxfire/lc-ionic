@@ -1,4 +1,4 @@
-package com.lucidcouple.app;
+package com.pradiste.app;
 
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,7 +12,7 @@ class MyWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Uri uri = Uri.parse(url);
-        if (uri.getHost() != null && uri.getHost().contains("lucidcouple.com")) {
+        if (uri.getHost() != null && uri.getHost().contains("pradiste.com")) {
             return false;
         }
 
