@@ -292,6 +292,16 @@ public class MainActivity extends Activity{
 
     /*-- callback reporting if error occurs --*/
     public class Callback extends WebViewClient{
+      public boolean shouldOverrideUrlLoading(WebView wv, String url) {
+          Uri uri = Uri.parse(url);
+            if(uri.getHost().contains("whatsapp")) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        }
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             Toast.makeText(getApplicationContext(), "Gagal membuka aplikasi!", Toast.LENGTH_SHORT).show();
             view.loadDataWithBaseURL( "file:///android_asset/", "<!DOCTYPE html>\n" +
